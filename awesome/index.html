@@ -1,0 +1,54 @@
+<!Docktype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="icon" href="dingus/pix/icn.png" />
+</head>
+<center>
+<body>
+	<h2>Sections</h2>
+	<a href="../dotfiles/index.html">XMonad Window Manager</a>
+	<a href="../awesome/index.html">Awesome Window Manager</a>
+	<a href="../contact/index.html">Contact</a>
+	<hr />
+</center>
+
+<h1 id="k_config">4k_config</h1>
+<p>Please note that this page is somewhat depricated and is really the original write of the NixOS page on this site. I have since stopped using AwesomeWM and I have this page here for nostalgia and really nothing else. This config can be installed on your system if you just clone the repo and put the awesome folder in your ~/.config/ but it'll work on any OS. All the Nix stuff please ignore and go to either Xmonad or NixOS pages. </p>
+
+<p>So here we are, the .dotfiles for my computer. These ones are meant to be run on an hidpi display and while some things will auto adjust to scale with smaller displays, some of these things will not. I am running this currently on a Dell XPS 9550 with a 4k screen. If I change computers I will likely make a separate repo for the non hidpi screens as to get here I have confused myself a little bit.The actual files are available on GitHub. There is also another page for XMonad without HiDPi support. </p>
+<h2 id="here-are-some-very-productive-looking-screenshots">Here are some very productive looking screenshots</h2>
+<center>
+<figure>
+<img src="https://github.com/ubuntu9786/4k_config/blob/main/screens/screen1.png?raw=true" alt="Pretend busy" height="540" width="960" /><figcaption aria-hidden="true">Pretend busy</figcaption>
+</figure>
+<figure>
+<img src="https://github.com/ubuntu9786/4k_config/blob/main/screens/screen3.png?raw=true" alt="desktop" height="540" width="960" /><figcaption aria-hidden="true">desktop</figcaption>
+</figure>
+</center>
+<h1 id="installation">Installation!</h1>
+<p>So this is where my lack of actual knowledge really begins to show. The install for most of this is… pretty manual to put it lightly.</p>
+<p>Essentially, git clone this repo onto your NixOS 20.09 live enviornment whereever you want. Then you’re going to want to go through the normal partitioning and formatting as per the NixOS manual’s guide for installing the OS. Once you have mounted and created default configuration is where things get interesting.</p>
+<p>The cloning can be done with <code>git clone https://github.com/ubuntu9786/4k_config.git</code></p>
+<ol type="1">
+<li>Open both the default configuration.nix and mine as root</li>
+<li>Copy everything below the clearly marked line into the default configuration.nix overwriting everything except the networking part</li>
+<li>Ensure that the parts above the line in my config are in the soon to be yours, albeit with the proper driver information/user/whatever else you changed.</li>
+<li>You can create a root password during the install, then with the following <code>nix-enter --root '/mnt'</code> as well and then set a password for the user you created with <code>passwd &lt;user&gt;</code> This will allow for you to just be able to log into the user that you created after the install is done instead of having to login as root in a tty or through the user in gdm.</li>
+<li>Bam! Install!! (with whatever command is stated in the NixOS manual)</liThats it for now!>
+</ol>
+<p>After rebooting, creating a root password, logging in as root and setting your user password, do as follows:</p>
+<ol type="1">
+<li><code>git clone https://github.com/ubuntu9786/4k_config.git</code></li>
+<li>open it up in nautilus or ranger or whatever</li>
+<li>place .Xresources and .xinirc in home folder</li>
+</ol>
+<ul>
+<li>if you are on a non HiDPi display, remove the line <code>dpi = 190</code> from the .Xresources file</li>
+</ul>
+<ol start="4" type="1">
+<li>place everything else in .config. If you dont have a .config directory, make one please. <code>mkdir ~/.config</code></li>
+</ol>
+<p>Restart AwesomeWM and you’re then rocking my dots.</p>
+</body>
+</html>

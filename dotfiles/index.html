@@ -1,0 +1,55 @@
+<!Docktype html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/ghost.css" />
+</head>
+
+<body>
+<center>
+<h1 id="liamheinicke">Liam Heinicke</h1>
+<body>
+	<h2>Sections</h2>
+	<a href="../dotfiles/index.html">XMonad Window Manager</a>
+	<a href="../awesome/index.html">Awesome Window Manager</a>
+	<a href="../contact/index.html">Contact</a>
+	<hr />
+</center>
+
+<h1 id="nixos-dotfiles">XMonad Dotfiles</h1>
+<p> Welcome to the page where I will keep track of my current dotfiles! Currently we are working with XMonad and are continually updating the corresponding GitHub repo to ensure that the setup is reproducible. You can find the repo to clone these yourself <link src="https://github.com/mahallow/thinkdots"/> which should do about 90% of the setup by itself. 
+<p>This is some XMonad on some ThinkPad.</p>
+<center>
+<figure>
+<img src="comf.png" alt="xmonad" width=100% /><figcaption aria-hidden="true"></figcaption>
+</figure>
+<figure>
+<img src="screen3.png" alt="xmonad2" width=100% /><figcaption aria-hidden="true"></figcaption>
+</figure>
+
+</center>
+<h1 id="installation-details">Installation &amp; Details</h1>
+<p>This is where things need to be improved. You can of course still copy or use these configs, though the install process is pretty diy.</p>
+<ol type="1">
+<li><code>git clone https://github.com/mahallow/thinkdots.git</code></li>
+<li>Once this is downloaded, move everything into your home folder <code>~/.</code> and make sure the layout matches the structure on Github</li>
+<li>Some folders can be disregarded, such as the nixos folder as that has the configuration to build a matching NixOS system from the ground up, which you can do if you want by going to <a href="../nixos/index.html">NixOS Install</a>
+</ol>
+<p>At this point you will have a functional copy of my XMonad dots! To get anything to look normal though, once you reboot you will want to clone the repo again and put everything in your <code>~/.home</code> folder. Logout, back in and bam.</p>
+
+<h2 id="thoughts">General Thoughts</h2>
+<p>After using AwesomeWM for such a long time it was more painful than it ever seemed worth to start over with a new grey blank screen as I would just end up frustrating myself back to the same sort of things I had going for me in AwesomeWM. That being said, Xmonad seems to make the effort worth it as it has a lot of the same ideas and concepts that it operates by, but seems to be smoother and less buggy. Not to say AwesomeWM didnt work, its awesome (duh) but I definitely had it quit, freezeup, or just be strange a few times on me. XMonad seems to run smoother.</p>
+<p> One of the issues with XMonad though is it is not the easist to go about changing things. My configuration is essentially a long list of copies and pastes from about 20 different people on GitHub and then me pruning through things that are not relevant to my computer. This works but I do have some things I cannot sort out that it does, like no gaps on workspaces with one window, and it is not as easy as with Awesome to work backwards. I have actually got the spaces to work by sort of shoe-horning in parts of configs I knew worked. Thanks DT. Though I am sure this is not the most clean way but the issue is I'm not sure how to do it cleaner. I now though seem to have removed my ability to right click anywhere across the whole system, in every application? </p>
+<h3>Technical Stuffs</h3>
+<p>Wallpapers are set with Nitrogen, restored in the Xmonad.hs file on startup. I have included only the apps used to get the config working out of the box.</p>
+<p>Also to note, you may try and edit your config and go for the classic <code>sudo nixos-rebuid switch</code> and find that you cannot. Not to worry, your user should be set to do administrative tasks, just with <code>doas</code>. Command <code>sudo</code> cannot be found.</p>
+<p>There are also a few different XMobar configs included. Feel free to change between them by: 1. <code>rm .xmonad/xmobar/xmobarrc</code> 2. <code>ln -s {choose one} xmobarrc</code> 3. Then recompile/restart XMonad with mod/super + Q</p>
+<p>Thats it for now!</p>
+<hr />
+<p>LH</p>
+Donate:
+<p><code>ETH: 0xce7f5fbcc643c1a620f8176bcad4ad0679e0c537</code></p>
+<p><code>BTC: 3Nme6AnFahGqJRWp5rGjVptL6NjpzLLgCi</code></p>
+<p><code>XMR: <485NFguWDS7NpaqtQdcxunMcexVVyhRJ4LyMuD5FedjZaGJL29vwAh9BAdgTkWjkSKcUx43cHEQVbeK3QEV9fDRd3RYZiZr</code></p>
+
+</body>
+</html>

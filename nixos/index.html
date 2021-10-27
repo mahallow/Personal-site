@@ -1,0 +1,79 @@
+<!Docktype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="icon" href="../dingus/pix/icn.png" />
+	<title>NixOS in Daily Life</title>
+<body>
+<center>
+<h1>NixOS and Friends</h1>
+<img src="https://nixos.org/logo/nixos-logo-only-hires.png" height="100"/>
+</center>
+
+<p>You have just fumbled your Arch install again, tried to <code>sudo pacman -Rns</code> some font you weren't using, and you removed font manager, or did any of <a href='alfa.pdf'>the following</a> and its time again to begin the Arch insta... STOP! There is another way! If you're here, you are one for dotfiles. You might not think so, but I can see it in you. What if I told you, you could essentially dotfile your machine, with the continual ability to switch between changes on the fly, even those pesky ones that removed audio support or deleted grub's ability to boot your OS.</p>
+<p>In steps <a href="www.nixos.org">NixOS</a> to solve your problems. The "do it yourself" distro for grownups. Follow these steps to rid yourself of ever having to do an Arch install just before your meeting starts with your mum looking over your shoulder.</p>
+
+<center>
+<img src="nixos.png" width='100%'/>
+</center>
+
+<p>I, regretfully so, actually put this to the test the other day. I may make a blog style page on this site somewhere and if so, I will link a more detailed story here. But I dd'd my install the other day on accident making a Ubuntu USB of all things. I was on the phone and in a rush and I ran <code>doas dd if=down/ubuntu.iso of=/dev/nvme0n1</code> which nvme0n1 is my actual hard disk. This finished in literally two seconds, which I thought was an error so I ran it a few more times then realized what I had done. After a restart, my computer was the Ubuntu live cd. </p>
+
+<p>Not to worry though, once I dd'd a proper NixOS unstable ISO onto the USB, I literally booted into NixOS, re-partitioned my disk (I just have one for / lol and no more) and then pasted my config in and did "nixos-install", rebooted, downloaded home manager which takes one command, then git cloned my dot files and did home-manager switch and literally in 15 minutes I had a 100% working copy of my this install. I no longer fear the drift and that weird feeling you get where your install of 6+ months is a patch work and it would never work exactly the same again</p>
+
+<h2>The Installation</h2> <p> This is where things get pretty interesting honestly. There is a lot of strangeness that comes with minimal Linux distro installs, but NixOS does it all from one text file, you can see <a href='../files/dots/nixos/configuration.nix'>mine here</a> and then modification of this file is really what manages the install after as well. Changes are then applied by doing a <xcode>nixos-rebuild switch</code> which essentially is a reinstall but it doesn't make changes to programs that you haven't altered. Part of my config file can be seen below. The idea here though is that every option, timezone, unicode support, keyboard layout, everything you setup during a Linux install, is declared ahead of time. You can see in the example screenshot (a snipit of my actual config) that I actually even have undervolting declared in configuration.nix.</p>
+
+<center>
+<img src='config.png' />
+</center>
+<p> Because you can change these and switch between changes on the fly, both forwards and backwards, it is both a breeze and not scary to make system changes that otherwise have the possibility of bricking your system. Video drivers are a good example. Try them all! Whatever works, keep, if it doesn't, <code>doas nixos-rollback </code> and try something else.</p>
+
+<h2 id="installation-details">Installation &amp; Details</h2>
+
+<p>This is where things need to be improved. You can of course still copy or use these configs, though the install process is pretty diy.  </p>
+<ol type="1">
+<li><code>sudo dd if=/dev/null of=/dev/sda</code> your machine</li>
+<li>Download NixOS and make a bootable USB. Feel free to use the Gnome version or whatever, what is actually installed is based entirely off of what is in <code>/etc/nixos/configuration.nix</code></li>
+<li><code>git clone https://github.com/mahallow/thinkdots.git</code> in the home directory or wherever on the live instance of Nix you're running</li>
+<li>Go through the NixOS manual on partitioning, formatting, mounting, then creating the default configuration</li>
+<li>Open up both the default configuration and the one from the git repo</li>
+<li>Change the name of the drive and wifi and ethernet cards in the configuration from the repo to match that which were auto generated. Also change your username unless you're also a Liam</li>
+<li>Delete default config, place new one in same folder.</li>
+<li><code>nixos-install</code></li>
+</ol>
+<p>At this point you will have a functional install! To get anything to look normal though, once you reboot you will want to clone the repo again and put everything in your <code>~/.home</code> folder. Logout, back in and bam.</p>
+
+<h2>Home-Manager and package management</h2>
+<p>So I am now trying to get into the nix home-manger as a way to make the individual user based packages part of the setup that can be cloned and applied to a new fresh NixOS install. Currently I do have this semi working, I mean I now can download applications by adding them to the file at ~/.config/nixpkgs/home.nix and then doing a classic home-manager switch. This works, though as far as I know now, this is not part of my configuration.nix and therefore would have to be setup post install if you were to simply install NixOS direcltly off my config. I will work on sorting this in a way that it can be auto managed though the original configuration.nix. I will also likely move the embeded packages off of configuration.nix and add them to a pkgs.nix file in /etc/nixos/ so that they can not clutter up the original config. I know this is common practice for people, but I do not know why so if you have a real reason this is beneficial please let me know. These files are live on GitHub now if you want to seriously recreate the entire setup I have, though you will have to complete the NixOS setup, install home-manager and ensure its working, and then apply ~/.config/nixpkgs/home.nix to your computer and home-manager switch. 
+
+<p>Over the last couple of days I have been playing with home-manager and the idea of putting dotfile configuration in here as well as packages installed on the home user. Understanding this more, I may go with this for programs that would work on other OS's, like MacOS, as this file could be used to setup things like ViM and ranger and whatever other programs are compatible that way. Here is a screenshot of the config as of now with user specific packages and NViM's configuration being defined here.</p>
+<center>
+<img src='home.png' width='90%'/>
+</center>
+
+<h2 id="general-usage">General usage</h2>
+<p>There is no browser by default in the config. In the screenshot I am using QuteBrowser, for which there are theme config files in the repo. You can either add that to the <code>configuration.nix</code> or <code>nix-env -iA nixos.qutebrowser</code> to make it for just your user. If you were bold enough to decide home-manager was for you, you can add it to <code>~/.config/nixpkgs/home.nix</code> as I have above and do a <code>home-manager switch</code>. This works in the same way NixOS does, but just for user defined programs. This can also be used on other distros or even MacOS which is pretty cool. </p>
+<p>Wallpapers are set with Nitrogen, restored in the Xmonad.hs file on startup. I have included only the apps used to get the config working out of the box.</p>
+<p>Also to note, you may try and edit your config and go for the classic <code>sudo nixos-rebuid switch</code> and find that you cannot. Not to worry, your user should be set to do administrative tasks, just with <code>doas</code>. Command <code>sudo</code> cannot be found.</p>
+<p>There are also a few different XMobar configs included. Feel free to change between them by: 1. <code>rm .xmonad/xmobar/xmobarrc</code> 2. <code>ln -s {choose one} xmobarrc</code> 3. Then recompile/restart XMonad with mod/super + Q</p>
+
+<p>So there you have it, you should now have a totally functioning and reproducible NixOS build. 
+<h3>What comes next</h3>
+<p> I am now currently using a combo of nix-env and the configuration file in /etc/nixos/ to install applications. This is great and all, but the further apart they become the further the setup comes from being entirely reproducible. There are some possible options here. 
+<ol type="1">
+<li>Start using home-manager. This is a cool idea but I am not sure how it integrates into the already configuration.nix. I do not want to have to do an install of configuration.nix, then manually setup home-manager, then pull down the rest of the home-manager configs. If this can be made to happen automatically in configuration.nix at the time of initial installation, count me in.</li>
+<li>Start separating out packages from the configuration.nix into their own file in /etc/nixos/ and then just import the file. This seems easier, and might be the way to go. Though I will loose the easy install for user only.
+<p>Awyway, thats it for now! I will likely add some cool photos here in the coming days.</p>
+</ol>
+
+<img src="comf.png" width='100%' />
+
+<hr />
+<p>LH</p>
+Donate:
+<p><code>ETH: 0xce7f5fbcc643c1a620f8176bcad4ad0679e0c537</code></p>
+<p><code>BTC: 3Nme6AnFahGqJRWp5rGjVptL6NjpzLLgCi</code></p>
+<p><code>XMR: <485NFguWDS7NpaqtQdcxunMcexVVyhRJ4LyMuD5FedjZaGJL29vwAh9BAdgTkWjkSKcUx43cHEQVbeK3QEV9fDRd3RYZiZr</code></p>
+
+</body>
+</html>

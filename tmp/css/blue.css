@@ -1,0 +1,19 @@
+body {
+	background:  #304560;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: arial;
+	color: #D5D9DF;
+}
+a {
+	color: #D4BC59;
+	text-decoration: underline;
+}
+a:visited {
+	color: #D4BC59;
+}
+a:hover {
+	color: #00000
+	text-decoration: none;
+}a

@@ -1,0 +1,188 @@
+body {
+margin:auto;
+width:70%;
+padding-top:25px;
+padding-bottom:8px;
+background-color: #2A2B2F;
+color: #FFFFFF;
+font-family: sans-serif;
+}
+
+nav {
+text-align:center;
+}
+
+#center {
+text-align:center;
+}
+
+pre {
+offset-distance : 30%;
+}
+a {
+color : #ffe620;
+}
+
+a:hover {
+color : #c5d5d5;
+}
+
+a.articlelist {
+color : #485978;
+font-size : 1.25em;
+font-family : monospace;
+}
+
+a.articlelist:hover {
+color : #c5d5d5;
+}
+
+a.sectionlink {
+color : #485978;
+font-size : 1.15em;
+font-family : sans-serif;
+font-weight : 700;
+}
+
+a.sectionlink:hover {
+color : #c5d5d5;
+}
+
+a.intable {
+color : #aca4f6;
+}
+
+a.intable:hover {
+color : #c5d5d5;
+}
+
+ul {
+margin-left : 10px;
+margin-right : 10px;
+padding-right : 40px;
+}
+
+li {
+margin-bottom : 3px;
+list-style-position : inside;
+}
+
+img {
+max-width : 100%;
+align : center;
+}
+
+img.inside {
+display:block;
+margin:auto;
+}
+
+img.vidya {
+max-width:400px;
+max-height:400px;
+padding:10px;
+}
+
+img.link {
+vertical-align : middle;
+width:32px;
+height:32px;
+}
+
+h2 {
+text-align:center;
+font-style : italic;
+color : #969388;
+}
+
+h3 {
+text-align:center;
+color : #7352E6;
+}
+
+h4 {
+text-align:center;
+color : #aca4f6;
+}
+
+strong {
+font-weight : 700;
+color : #C5D5D5;
+}
+
+em, cite {
+color:#aca4f6;
+}
+
+em.hrec {
+font-weight : 700;
+font-style : italic;
+color : lime;
+}
+
+em.rec {
+font-weight : 700;
+color : greenyellow;
+font-style : normal;
+}
+
+em.srec {
+font-weight : 500;
+color : yellow;
+font-style : normal;
+}
+
+em.nrec {
+font-weight : 400;
+color : orange;
+font-style : normal;
+}
+
+em.avoid {
+font-weight : 700;
+color : red;
+font-style : italic;
+}
+
+q, blockquote {
+font-style : italic;
+color : #C5D5D5;
+}
+
+#articlelist {
+margin-top : 20px;
+font-family : Sans;
+text-align : center;
+padding : 5px;
+}
+
+table {
+border : 0;
+}
+
+td {
+border : #f8f8f8 solid 1px;
+padding-left : 2px;
+padding-right : 2px;
+padding-top : 0;
+padding-bottom : 0;
+background-color : #454545;
+color : #f8f8f8;
+}
+
+.toprow {
+background-color : #313131;
+color : #f8f8f8;
+}
+
+.bad {
+background-color:crimson;
+}
+.neutral {
+background-color:gold;
+color:black;
+}
+.good {
+background-color:greenyellow;
+color:black;
+}
